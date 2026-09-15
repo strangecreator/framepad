@@ -1,5 +1,5 @@
 ---
-name: qa-generation
+name: framepad-qa-generation
 description: Generate grounded egocentric video QA datasets from annotated Framepad projects. Use when creating short-, medium-, and long-term questions from saved vboxes, notes, and landmark groups, or expanding an existing benchmark with attribute, spatial, or action questions.
 ---
 
@@ -27,7 +27,7 @@ Groups named `SPECIAL: <name>` identify distinctive landmarks that divide the ro
 
 1. **Finish SHORT questions first.** Build a local fact bank from the reviewed evidence. You may retain more supporting facts than the requested number of questions. Write and provide each video's SHORT CSV before starting its MEDIUM/LONG file.
 2. **Derive MEDIUM and LONG questions.** Compare or connect the short facts and revisit video evidence only where needed. Use genuinely relevant observations, not unrelated intervals added to inflate a question's horizon.
-3. **Review and deliver.** Check definitive subject identification, answers, evidence coverage, duplicates, and requested counts. Report any shortfall instead of inventing questions.
+3. **Review and deliver.** Check definitive subject identification, question categories, answer formats, answers, evidence coverage, duplicates, and requested counts. Report any shortfall instead of inventing questions.
 
 ## Make questions definitive
 
@@ -42,23 +42,36 @@ Useful wording patterns include “What color was the minibus crossing in front 
 
 ## CSV contract
 
-Write UTF-8 CSV with exactly these columns:
+Write UTF-8 CSV with exactly these six columns in this order:
 
 ```csv
-question_group,question_type,question,answer,time_segments
+question_group,question_type,question,answer_type,answer,time_segments
 ```
 
 | Column | Requirements |
 | :--- | :--- |
 | `question_group` | `SHORT`, `MEDIUM`, or `LONG`. SHORT needs one moment or nearby moments spanning less than 30 seconds. MEDIUM connects separate encounters or intermediate sequences. LONG needs several relevant observations distributed across the video. Classify by the evidence needed to answer, not search effort. |
-| `question_type` | `textual` or `binary`. |
+| `question_type` | The information requested: `attribute`, `spatial`, `action`, `mixed`, or `other`. Apply the classification rules below. |
 | `question` | A concise, definitive question without timestamp hints. |
-| `answer` | A canonical textual answer, or lowercase `true` / `false`. Give multipart answers in the requested order. |
+| `answer_type` | `textual` or `binary`, independently of the question category and horizon. |
+| `answer` | For `textual`, a canonical textual answer. For `binary`, exactly lowercase `true` or `false`. Give multipart textual answers in the requested order. |
 | `time_segments` | Sufficient evidence intervals with millisecond precision, such as `[[00:02:35.223-00:02:37.156], [00:03:12.223-00:03:51.923]]`. Sort intervals, merge overlaps, and stay within video bounds. |
+
+Classify `question_type` by what the answer must establish:
+
+- `attribute`: properties of people or objects, such as color, clothing, material, shape, or displayed text. Comparing colors across encounters remains `attribute`.
+- `spatial`: positions, orientations, distances, or spatial relationships, such as which side held an object or whether a child stood in front of an adult.
+- `action`: activities, interactions, or movements, such as carrying, pushing, crossing, or overtaking.
+- `mixed`: answering requires more than one of these information categories. Multiple subjects, multiple moments, or a LONG horizon alone do not make a question mixed.
+- `other`: the requested information does not fit the categories above, such as encounter order without a queried attribute, spatial relation, or action.
+
+Landmarks and actions used only to identify a subject do not change its category. For example, asking the color of a minibus crossing after a canopy is `attribute`, while asking whether it crossed in front of us is `action`. Either category can have a `textual` or `binary` answer. Classify a static front/behind relation as `spatial` and an overtaking event as `action`.
+
+Older five-column examples may use `question_type` for `textual` / `binary`. Interpret that legacy field as `answer_type` and classify the new `question_type` from the question's meaning. Use the six-column contract for new outputs. Do not rewrite an existing dataset unless its migration is requested.
 
 For first/last-subject questions, include the identified subject's evidence without the entire preceding/following video merely to prove encounter order. Aggregate questions need evidence for every observation used in the answer. Preserve timing accuracy without claiming that retrieval windows are exact event boundaries.
 
-Quote CSV fields containing commas, quotes, or newlines. Validate schema, allowed values, binary literals, duplicate questions within each video, interval ordering and bounds, and SHORT evidence spans. Structural validation does not establish semantic correctness. Match visual review depth to the user's request and state what was checked.
+Quote CSV fields containing commas, quotes, or newlines. Validate the exact six-column schema, allowed question categories and answer types, binary literals when `answer_type` is `binary`, duplicate questions within each video, interval ordering and bounds, and SHORT evidence spans. Review whether each question's category matches its requested information. Structural validation does not establish semantic correctness. Match visual review depth to the user's request and state what was checked.
 
 ## Deliverables
 

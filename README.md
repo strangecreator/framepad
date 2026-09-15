@@ -28,13 +28,13 @@ Use Framepad to build an egocentric video QA benchmark:
 
 1. **Mark up the video.** Save useful frames and observations, and group related encounters.
 2. **Identify landmarks.** Name distinctive landmark groups `SPECIAL: <name>` so questions can identify moments without timestamps.
-3. **Generate questions with Codex or Claude.** Ask your agent to use [the QA generation skill](skills/qa-generation/SKILL.md), and provide your project paths and output folder. The skill guides it to work from copies, inspect annotations and captures, and write SHORT questions before deriving MEDIUM and LONG questions.
+3. **Generate questions with Codex or Claude.** Ask your agent to use [the QA generation skill](skills/framepad-qa-generation/SKILL.md), and provide your project paths and output folder. The skill guides it to work from copies, inspect annotations and captures, and write SHORT questions before deriving MEDIUM and LONG questions.
 4. **Review the CSVs.** Check that each question has one clear answer. Keep timestamps in the evidence column, and provide only the video and question to the system you evaluate.
 
 The skill produces separate SHORT and MEDIUM/LONG CSVs for each video, using:
 
 ```csv
-question_group,question_type,question,answer,time_segments
+question_group,question_type,question,answer_type,answer,time_segments
 ```
 
 This workflow was used to prepare questions from three annotated walking videos, covering visible attributes, spatial relationships, and actions. Question generation happens separately in your coding agent.
@@ -67,7 +67,7 @@ Hold a seek shortcut to keep moving. While typing, ordinary arrows and Space ret
 
 Framepad saves your work as a `.framepad` project. To access its contents, right-click it in Finder and choose **Show Package Contents**: captures are in `captures/`, and notes, groups, and timing metadata are in `project.json`.
 
-There is no built-in QA CSV exporter. Use the [QA generation skill](skills/qa-generation/SKILL.md) for that workflow. Share the project together with access to its original video, which is stored separately.
+There is no built-in QA CSV exporter. Use the [QA generation skill](skills/framepad-qa-generation/SKILL.md) for that workflow. Share the project together with access to its original video, which is stored separately.
 
 ## Collaboration
 
