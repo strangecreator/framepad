@@ -1,0 +1,49 @@
+FRAMEPAD
+Every frame. Every thought.
+
+INSTALL
+Drag Framepad into Applications, then open it from Applications.
+Requires macOS 14 Sonoma or later. Supports Apple silicon and Intel Macs.
+
+This build is locally signed and is not notarized by Apple. If macOS blocks
+the first launch, go to System Settings > Privacy & Security > Open Anyway
+after trying to open Framepad. Only approve a build you trust.
+
+GET STARTED
+Create a project, choose a local video, and choose where to save your project.
+Your video stays in its original location. Projects contain notes and PNG
+captures. If the video moves, use Locate video or Relink source video.
+
+Option Space   Play / pause from any pane
+Space          Play / pause outside text; insert a space while typing
+Left / Right   Seek 3 seconds outside text input; hold to keep seeking
+Command Left / Right  Seek 3 seconds from any pane; hold to keep seeking
+Command I      Focus the prompt editor
+Command Shift C  Create or edit a rectangular crop
+Command W      Clear the entire crop; keep full screen active
+Command Return Save a frame and note (or update the selected vbox)
+Command /      Save the note only
+Command G      Create a group
+Backspace      Delete selected vbox outside text input; never deletes groups
+Command Z      Undo a document change from any pane
+Command Shift Z  Redo a document change
+Return         Save group description and remove input focus
+Command Shift W  Close the window
+
+While typing, arrows move the text cursor; Command Left / Right seek video.
+Use Option Space for playback while typing. Shift Return adds a new line
+to a group description. Drag crop edges/corners to resize or inside to move.
+Click a saved vbox to edit it; click empty collection space to return to your
+previous playhead and draft. Descriptions save automatically.
+Saving an edited vbox keeps your scroll position when it is visible. If it
+is offscreen, the collection scrolls to center it when space allows.
+Click a group title or its empty border area to put new vboxes there.
+Use its three-dot menu to rename it, remove only the group, or remove it
+with all its vboxes. Names save on Return or loss of focus. Group removal
+is undoable; groups can only be removed through their menu.
+Drag existing vboxes into a group. Use the floating down-arrow button to
+return to the end of a long collection. The button is at the bottom-right;
+its black background and white arrow invert on hover. Hover the video progress bar for
+a precise time preview. Buttons visibly highlight and show a pointer cursor
+on hover; the progress bar also uses a pointer cursor.
+Frame indexes start at zero. Timestamps use actual video presentation times.

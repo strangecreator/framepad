@@ -1,0 +1,12 @@
+.build/
+.build-tests/
+.swiftpm/
+.DS_Store
+dist/*
+!dist/Framepad-1.6.0.dmg
+!dist/Framepad-1.6.0.dmg.sha256
+.cache/
+benchmark-output/
+*.framepad/
+*.xcuserstate
+xcuserdata/
