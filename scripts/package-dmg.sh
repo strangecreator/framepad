@@ -8,7 +8,7 @@ fi
 staging="$(mktemp -d "$PWD/.build/dmg-stage.XXXXXX")"
 ditto dist/Framepad.app "$staging/Framepad.app"
 ln -s /Applications "$staging/Applications"
-cp Resources/Install.txt "$staging/Start here.txt"
+cp resources/Install.txt "$staging/Start here.txt"
 app_version="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' dist/Framepad.app/Contents/Info.plist)"
 dmg_path="dist/Framepad-${app_version}.dmg"
 hdiutil create -volname Framepad -srcfolder "$staging" -ov -format UDZO -imagekey zlib-level=9 "$dmg_path"

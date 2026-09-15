@@ -16,7 +16,7 @@ for architecture in $architectures; do
     executables+=(".build/$architecture/$architecture-apple-macosx/$configuration/Framepad")
 done
 lipo -create "${executables[@]}" -output "$app/Contents/MacOS/Framepad"
-cp Resources/Info.plist "$app/Contents/Info.plist"
+cp resources/Info.plist "$app/Contents/Info.plist"
 swift scripts/make-icon.swift .build/package/AppIcon.iconset
 iconutil -c icns .build/package/AppIcon.iconset -o "$app/Contents/Resources/AppIcon.icns"
 chmod +x "$app/Contents/MacOS/Framepad"

@@ -6,8 +6,8 @@ let package = Package(
     platforms: [.macOS(.v14)],
     products: [.executable(name: "Framepad", targets: ["Framepad"])],
     targets: [
-        .target(name: "FramepadCore"),
-        .executableTarget(name: "Framepad", dependencies: ["FramepadCore"]),
-        .testTarget(name: "FramepadCoreTests", dependencies: ["FramepadCore"])
+        .target(name: "FramepadCore", path: "sources/framepad-core"),
+        .executableTarget(name: "Framepad", dependencies: ["FramepadCore"], path: "sources/framepad"),
+        .testTarget(name: "FramepadCoreTests", dependencies: ["FramepadCore"], path: "tests/framepad-core-tests")
     ]
 )
