@@ -67,8 +67,6 @@ Classify `question_type` by what the answer must establish:
 
 Landmarks and actions used only to identify a subject do not change its category. For example, asking the color of a minibus crossing after a canopy is `attribute`, while asking whether it crossed in front of us is `action`. Either category can have a `textual` or `binary` answer. Classify a static front/behind relation as `spatial` and an overtaking event as `action`.
 
-Older five-column examples may use `question_type` for `textual` / `binary`. Interpret that legacy field as `answer_type` and classify the new `question_type` from the question's meaning. Use the six-column contract for new outputs. Do not rewrite an existing dataset unless its migration is requested.
-
 For first/last-subject questions, include the identified subject's evidence without the entire preceding/following video merely to prove encounter order. Aggregate questions need evidence for every observation used in the answer. Preserve timing accuracy without claiming that retrieval windows are exact event boundaries.
 
 Quote CSV fields containing commas, quotes, or newlines. Validate the exact six-column schema, allowed question categories and answer types, binary literals when `answer_type` is `binary`, duplicate questions within each video, interval ordering and bounds, and SHORT evidence spans. Review whether each question's category matches its requested information. Structural validation does not establish semantic correctness. Match visual review depth to the user's request and state what was checked.
